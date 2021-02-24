@@ -2,8 +2,8 @@
 
 /** 
 Fields Summary: 
-- smudgefree [select]
-- duration [inputQuantityValue]
+- ideal [select]
+- sulphate [booleanSelect]
 */ 
 
 
@@ -17,7 +17,7 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
     ),
   ),
    'dao' => NULL,
-   'key' => 'class1',
+   'key' => 'hair',
    'parentClass' => '',
    'implementsInterfaces' => '',
    'title' => '',
@@ -67,13 +67,33 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
             array (
               0 => 
               array (
-                'key' => 'Yes',
-                'value' => 'Yes',
+                'key' => 'healthy scalp',
+                'value' => 'healthy scalp',
               ),
               1 => 
               array (
-                'key' => 'No',
-                'value' => 'No',
+                'key' => 'smoothening',
+                'value' => 'smoothening',
+              ),
+              2 => 
+              array (
+                'key' => 'thickening',
+                'value' => 'thickening',
+              ),
+              3 => 
+              array (
+                'key' => 'split ends',
+                'value' => 'split ends',
+              ),
+              4 => 
+              array (
+                'key' => 'anti dandruff',
+                'value' => 'anti dandruff',
+              ),
+              5 => 
+              array (
+                'key' => 'anti hairfall',
+                'value' => 'anti harfalli',
               ),
             ),
              'width' => '',
@@ -85,13 +105,13 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'columnLength' => 190,
              'phpdocType' => 'string',
              'dynamicOptions' => false,
-             'name' => 'smudgefree',
-             'title' => 'Smudge Free',
+             'name' => 'ideal',
+             'title' => 'Ideal for',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -102,36 +122,40 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           1 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\InputQuantityValue::__set_state(array(
-             'fieldtype' => 'inputQuantityValue',
-             'queryColumnType' => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\BooleanSelect::__set_state(array(
+             'fieldtype' => 'booleanSelect',
+             'yesLabel' => 'yes',
+             'noLabel' => 'no',
+             'emptyLabel' => 'empty',
+             'options' => 
             array (
-              'value' => 'varchar(255)',
-              'unit' => 'varchar(50)',
+              0 => 
+              array (
+                'key' => 'empty',
+                'value' => 0,
+              ),
+              1 => 
+              array (
+                'key' => 'yes',
+                'value' => 1,
+              ),
+              2 => 
+              array (
+                'key' => 'no',
+                'value' => -1,
+              ),
             ),
-             'columnType' => 
-            array (
-              'value' => 'varchar(255)',
-              'unit' => 'varchar(50)',
-            ),
-             'phpdocType' => '\\Pimcore\\Model\\DataObject\\Data\\InputQuantityValue',
-             'width' => NULL,
-             'unitWidth' => NULL,
-             'defaultValue' => NULL,
-             'defaultUnit' => NULL,
-             'validUnits' => 
-            array (
-              0 => '1',
-            ),
-             'decimalPrecision' => NULL,
-             'autoConvert' => NULL,
-             'name' => 'duration',
-             'title' => 'Duration',
+             'width' => '',
+             'queryColumnType' => 'tinyint(1) null',
+             'columnType' => 'tinyint(1) null',
+             'phpdocType' => 'bool',
+             'name' => 'sulphate',
+             'title' => 'Sulphate Free',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -139,7 +163,6 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'invisible' => false,
              'visibleGridView' => false,
              'visibleSearch' => false,
-             'defaultValueGenerator' => '',
           )),
         ),
          'locked' => false,

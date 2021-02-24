@@ -4,7 +4,8 @@
 Fields Summary: 
 - skintone [select]
 - spf [select]
-- waterproof [select]
+- waterproof [booleanSelect]
+- for [select]
 */ 
 
 
@@ -18,7 +19,7 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
     ),
   ),
    'dao' => NULL,
-   'key' => 'class2',
+   'key' => 'face',
    'parentClass' => '',
    'implementsInterfaces' => '',
    'title' => '',
@@ -68,23 +69,23 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
             array (
               0 => 
               array (
-                'key' => 'Tan to dark',
-                'value' => 'Tan to dark',
+                'key' => 'tan to dark',
+                'value' => 'tan to dark',
               ),
               1 => 
               array (
-                'key' => 'Medium to tan',
-                'value' => 'Medium to tan',
+                'key' => 'medium to tan',
+                'value' => 'medium to tan',
               ),
               2 => 
               array (
-                'key' => 'Light to medium',
-                'value' => 'Light to medium',
+                'key' => 'light to medium',
+                'value' => 'light to medium',
               ),
               3 => 
               array (
-                'key' => 'Fair to light',
-                'value' => 'Fair to light',
+                'key' => 'fair to light',
+                'value' => 'fair to light',
               ),
             ),
              'width' => '',
@@ -102,7 +103,7 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -148,7 +149,7 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -159,19 +160,102 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'defaultValueGenerator' => '',
           )),
           2 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\BooleanSelect::__set_state(array(
+             'fieldtype' => 'booleanSelect',
+             'yesLabel' => 'yes',
+             'noLabel' => 'no',
+             'emptyLabel' => 'empty',
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'empty',
+                'value' => 0,
+              ),
+              1 => 
+              array (
+                'key' => 'yes',
+                'value' => 1,
+              ),
+              2 => 
+              array (
+                'key' => 'no',
+                'value' => -1,
+              ),
+            ),
+             'width' => '',
+             'queryColumnType' => 'tinyint(1) null',
+             'columnType' => 'tinyint(1) null',
+             'phpdocType' => 'bool',
+             'name' => 'waterproof',
+             'title' => 'Waterproof',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          3 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
              'fieldtype' => 'select',
              'options' => 
             array (
               0 => 
               array (
-                'key' => 'No',
-                'value' => 'No',
+                'key' => 'smooth skin',
+                'value' => 'smooth skin',
               ),
               1 => 
               array (
-                'key' => 'Yes',
-                'value' => 'Yes',
+                'key' => 'exfoliation',
+                'value' => 'exfoliation',
+              ),
+              2 => 
+              array (
+                'key' => 'deep cleansing',
+                'value' => 'deep cleansing',
+              ),
+              3 => 
+              array (
+                'key' => 'oil control',
+                'value' => 'oil control',
+              ),
+              4 => 
+              array (
+                'key' => 'anti acne',
+                'value' => 'anti acne',
+              ),
+              5 => 
+              array (
+                'key' => 'spot care',
+                'value' => 'spot care',
+              ),
+              6 => 
+              array (
+                'key' => 'UV protection',
+                'value' => 'UV protection',
+              ),
+              7 => 
+              array (
+                'key' => 'moisturising',
+                'value' => 'moisturising',
+              ),
+              8 => 
+              array (
+                'key' => 'fairness',
+                'value' => 'fairness',
+              ),
+              9 => 
+              array (
+                'key' => 'brightening',
+                'value' => 'brightening',
               ),
             ),
              'width' => '',
@@ -183,13 +267,13 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
              'columnLength' => 190,
              'phpdocType' => 'string',
              'dynamicOptions' => false,
-             'name' => 'waterproof',
-             'title' => 'Water Proof',
+             'name' => 'for',
+             'title' => 'For',
              'tooltip' => '',
              'mandatory' => false,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',

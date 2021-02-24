@@ -19,12 +19,14 @@ Fields Summary:
 - skintype [select]
 - finish [select]
 - applicationarea [manyToOneRelation]
-- image [image]
+- image [manyToOneRelation]
 - rating [select]
 - availablefrom [date]
 - classification [objectbricks]
 - country [country]
 - quantity [inputQuantityValue]
+- ingredients [multiselect]
+- maximumlife [inputQuantityValue]
 */ 
 
 
@@ -33,7 +35,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'name' => 'Product',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1614071813,
+   'modificationDate' => 1614157162,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -356,25 +358,30 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             array (
               0 => 
               array (
+                'key' => 'Foam',
+                'value' => 'Foam',
+              ),
+              1 => 
+              array (
                 'key' => 'Crayon',
                 'value' => 'Crayon',
               ),
-              1 => 
+              2 => 
               array (
                 'key' => 'Powder',
                 'value' => 'Powder',
               ),
-              2 => 
+              3 => 
               array (
                 'key' => 'Solid',
                 'value' => 'Solid',
               ),
-              3 => 
+              4 => 
               array (
                 'key' => 'Liquid',
                 'value' => 'Liquid',
               ),
-              4 => 
+              5 => 
               array (
                 'key' => 'Gel',
                 'value' => 'Gel',
@@ -599,14 +606,34 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'visibleSearch' => true,
           )),
           13 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\Image::__set_state(array(
-             'fieldtype' => 'image',
+          Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
+             'fieldtype' => 'manyToOneRelation',
              'width' => '',
-             'height' => '',
-             'uploadPath' => '',
-             'queryColumnType' => 'int(11)',
-             'columnType' => 'int(11)',
-             'phpdocType' => '\\Pimcore\\Model\\Asset\\Image',
+             'assetUploadPath' => '',
+             'relationType' => true,
+             'queryColumnType' => 
+            array (
+              'id' => 'int(11)',
+              'type' => 'enum(\'document\',\'asset\',\'object\')',
+            ),
+             'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\DataObject\\AbstractObject',
+             'objectsAllowed' => false,
+             'assetsAllowed' => true,
+             'assetTypes' => 
+            array (
+              0 => 
+              array (
+                'assetTypes' => 'image',
+              ),
+            ),
+             'documentsAllowed' => false,
+             'documentTypes' => 
+            array (
+            ),
+             'classes' => 
+            array (
+            ),
+             'pathFormatterClass' => '',
              'name' => 'image',
              'title' => 'Image',
              'tooltip' => '',
@@ -617,7 +644,6 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
-             'relationType' => false,
              'invisible' => false,
              'visibleGridView' => true,
              'visibleSearch' => true,
@@ -708,8 +734,11 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'phpdocType' => '\\Pimcore\\Model\\DataObject\\Objectbrick',
              'allowedTypes' => 
             array (
-              0 => 'class1',
-              1 => 'class2',
+              0 => 'appliance',
+              1 => 'body',
+              2 => 'cosmetics',
+              3 => 'face',
+              4 => 'hair',
             ),
              'maxItems' => '',
              'border' => false,
@@ -2031,6 +2060,77 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'autoConvert' => false,
              'name' => 'quantity',
              'title' => 'Quantity',
+             'tooltip' => '',
+             'mandatory' => true,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => true,
+             'defaultValueGenerator' => '',
+          )),
+          19 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Multiselect::__set_state(array(
+             'fieldtype' => 'multiselect',
+             'options' => 
+            array (
+            ),
+             'width' => '',
+             'height' => '',
+             'maxItems' => '',
+             'renderType' => 'list',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
+             'queryColumnType' => 'text',
+             'columnType' => 'text',
+             'phpdocType' => 'array',
+             'dynamicOptions' => false,
+             'name' => 'ingredients',
+             'title' => 'Ingredients Preference',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          20 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\InputQuantityValue::__set_state(array(
+             'fieldtype' => 'inputQuantityValue',
+             'queryColumnType' => 
+            array (
+              'value' => 'varchar(255)',
+              'unit' => 'varchar(50)',
+            ),
+             'columnType' => 
+            array (
+              'value' => 'varchar(255)',
+              'unit' => 'varchar(50)',
+            ),
+             'phpdocType' => '\\Pimcore\\Model\\DataObject\\Data\\InputQuantityValue',
+             'width' => NULL,
+             'unitWidth' => NULL,
+             'defaultValue' => NULL,
+             'defaultUnit' => NULL,
+             'validUnits' => 
+            array (
+              0 => '4',
+            ),
+             'decimalPrecision' => NULL,
+             'autoConvert' => false,
+             'name' => 'maximumlife',
+             'title' => 'Maximum Sell Life',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
