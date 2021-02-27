@@ -65,24 +65,24 @@ return Pimcore\Model\DataObject\Objectbrick\Definition::__set_state(array(
           0 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\BooleanSelect::__set_state(array(
              'fieldtype' => 'booleanSelect',
-             'yesLabel' => '',
-             'noLabel' => '',
-             'emptyLabel' => '',
+             'yesLabel' => 'Yes',
+             'noLabel' => 'No',
+             'emptyLabel' => 'empty',
              'options' => 
             array (
               0 => 
               array (
-                'key' => '',
+                'key' => 'empty',
                 'value' => 0,
               ),
               1 => 
               array (
-                'key' => '',
+                'key' => 'Yes',
                 'value' => 1,
               ),
               2 => 
               array (
-                'key' => '',
+                'key' => 'No',
                 'value' => -1,
               ),
             ),

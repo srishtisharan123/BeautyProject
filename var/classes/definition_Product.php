@@ -35,7 +35,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'name' => 'Product',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1614157162,
+   'modificationDate' => 1614166917,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -2079,6 +2079,31 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'fieldtype' => 'multiselect',
              'options' => 
             array (
+              0 => 
+              array (
+                'key' => 'Sulphur-free',
+                'value' => 'sulphurfree',
+              ),
+              1 => 
+              array (
+                'key' => 'Oil-free',
+                'value' => 'oilfree',
+              ),
+              2 => 
+              array (
+                'key' => 'Fragrance-free',
+                'value' => 'fragrance',
+              ),
+              3 => 
+              array (
+                'key' => 'Dermatologically Tested',
+                'value' => 'dermatologically',
+              ),
+              4 => 
+              array (
+                'key' => 'Alcohal-free',
+                'value' => 'alcohalfree',
+              ),
             ),
              'width' => '',
              'height' => '',
