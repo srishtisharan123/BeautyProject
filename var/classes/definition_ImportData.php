@@ -6,17 +6,19 @@
 
 
 Fields Summary: 
-- name [input]
-- brand [manyToOneRelation]
+- class_name [select]
+- file [manyToOneRelation]
+- status [checkbox]
+- message [textarea]
 */ 
 
 
 return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
-   'id' => '5',
-   'name' => 'Subbrand',
+   'id' => '7',
+   'name' => 'ImportData',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1614097885,
+   'modificationDate' => 1614880913,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -70,31 +72,44 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
          'childs' => 
         array (
           0 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\Input::__set_state(array(
-             'fieldtype' => 'input',
-             'width' => NULL,
-             'defaultValue' => NULL,
+          Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+             'fieldtype' => 'select',
+             'options' => 
+            array (
+              0 => 
+              array (
+                'key' => 'Category',
+                'value' => 'Category',
+              ),
+              1 => 
+              array (
+                'key' => 'Product',
+                'value' => 'Product',
+              ),
+            ),
+             'width' => '',
+             'defaultValue' => '',
+             'optionsProviderClass' => '',
+             'optionsProviderData' => '',
              'queryColumnType' => 'varchar',
              'columnType' => 'varchar',
              'columnLength' => 190,
              'phpdocType' => 'string',
-             'regex' => '',
-             'unique' => false,
-             'showCharCount' => false,
-             'name' => 'name',
-             'title' => 'Name',
+             'dynamicOptions' => false,
+             'name' => 'class_name',
+             'title' => 'Class name',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
              'relationType' => false,
              'invisible' => false,
-             'visibleGridView' => true,
-             'visibleSearch' => true,
+             'visibleGridView' => false,
+             'visibleSearch' => false,
              'defaultValueGenerator' => '',
           )),
           1 => 
@@ -109,10 +124,14 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
               'type' => 'enum(\'document\',\'asset\',\'object\')',
             ),
              'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\DataObject\\AbstractObject',
-             'objectsAllowed' => true,
-             'assetsAllowed' => false,
+             'objectsAllowed' => false,
+             'assetsAllowed' => true,
              'assetTypes' => 
             array (
+              0 => 
+              array (
+                'assetTypes' => 'text',
+              ),
             ),
              'documentsAllowed' => false,
              'documentTypes' => 
@@ -120,24 +139,69 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
             ),
              'classes' => 
             array (
-              0 => 
-              array (
-                'classes' => 'Brand',
-              ),
             ),
              'pathFormatterClass' => '',
-             'name' => 'brand',
-             'title' => 'brand',
+             'name' => 'file',
+             'title' => 'file',
              'tooltip' => '',
-             'mandatory' => false,
+             'mandatory' => true,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
              'invisible' => false,
              'visibleGridView' => false,
+             'visibleSearch' => false,
+          )),
+          2 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Checkbox::__set_state(array(
+             'fieldtype' => 'checkbox',
+             'defaultValue' => NULL,
+             'queryColumnType' => 'tinyint(1)',
+             'columnType' => 'tinyint(1)',
+             'phpdocType' => 'bool',
+             'name' => 'status',
+             'title' => 'status',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
+             'visibleSearch' => false,
+             'defaultValueGenerator' => '',
+          )),
+          3 => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Textarea::__set_state(array(
+             'fieldtype' => 'textarea',
+             'width' => '',
+             'height' => '',
+             'maxLength' => NULL,
+             'showCharCount' => false,
+             'excludeFromSearchIndex' => false,
+             'queryColumnType' => 'longtext',
+             'columnType' => 'longtext',
+             'phpdocType' => 'string',
+             'name' => 'message',
+             'title' => 'Log message',
+             'tooltip' => '',
+             'mandatory' => false,
+             'noteditable' => false,
+             'index' => false,
+             'locked' => false,
+             'style' => '',
+             'permissions' => NULL,
+             'datatype' => 'data',
+             'relationType' => false,
+             'invisible' => false,
+             'visibleGridView' => true,
              'visibleSearch' => false,
           )),
         ),

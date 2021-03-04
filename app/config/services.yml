@@ -18,6 +18,7 @@ services:
     #         - { name: templating.helper, alias: fooBar }
 
     # Example event listener for objects
-    # AppBundle\EventListener\TestListener:
-    #     tags:
-    #         - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: onObjectPreUpdate }
+    AppBundle\EventListener\TestListener:
+        tags:
+            - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: dateValidation }
+            # - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: extension }

@@ -9,7 +9,7 @@ Fields Summary:
 - sku [input]
 - name [input]
 - description [textarea]
-- brand [manyToOneRelation]
+- brand [select]
 - size [select]
 - color [rgbaColor]
 - price [numeric]
@@ -26,7 +26,7 @@ Fields Summary:
 - country [country]
 - quantity [inputQuantityValue]
 - ingredients [multiselect]
-- maximumlife [inputQuantityValue]
+- expirydate [date]
 */ 
 
 
@@ -35,7 +35,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'name' => 'Product',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1614166917,
+   'modificationDate' => 1614772397,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -171,47 +171,55 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'visibleSearch' => false,
           )),
           3 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\ManyToOneRelation::__set_state(array(
-             'fieldtype' => 'manyToOneRelation',
-             'width' => '',
-             'assetUploadPath' => '',
-             'relationType' => true,
-             'queryColumnType' => 
-            array (
-              'id' => 'int(11)',
-              'type' => 'enum(\'document\',\'asset\',\'object\')',
-            ),
-             'phpdocType' => '\\Pimcore\\Model\\Document\\Page | \\Pimcore\\Model\\Document\\Snippet | \\Pimcore\\Model\\Document | \\Pimcore\\Model\\Asset | \\Pimcore\\Model\\DataObject\\AbstractObject',
-             'objectsAllowed' => true,
-             'assetsAllowed' => false,
-             'assetTypes' => 
-            array (
-            ),
-             'documentsAllowed' => false,
-             'documentTypes' => 
-            array (
-            ),
-             'classes' => 
+          Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
+             'fieldtype' => 'select',
+             'options' => 
             array (
               0 => 
               array (
-                'classes' => 'Brand',
+                'key' => 'Lakme',
+                'value' => 'Lakme',
+              ),
+              1 => 
+              array (
+                'key' => 'Mac',
+                'value' => 'Mac',
+              ),
+              2 => 
+              array (
+                'key' => 'Loreal',
+                'value' => 'Loreal',
+              ),
+              3 => 
+              array (
+                'key' => 'Meybelline',
+                'value' => 'Meybelline',
               ),
             ),
-             'pathFormatterClass' => '',
+             'width' => '',
+             'defaultValue' => '',
+             'optionsProviderClass' => '\\AppBundle\\OptionsProvider\\BrandName',
+             'optionsProviderData' => '',
+             'queryColumnType' => 'varchar',
+             'columnType' => 'varchar',
+             'columnLength' => 190,
+             'phpdocType' => 'string',
+             'dynamicOptions' => false,
              'name' => 'brand',
              'title' => 'Brand Name',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
              'index' => false,
-             'locked' => false,
+             'locked' => NULL,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
+             'relationType' => false,
              'invisible' => false,
              'visibleGridView' => true,
              'visibleSearch' => true,
+             'defaultValueGenerator' => '',
           )),
           4 => 
           Pimcore\Model\DataObject\ClassDefinition\Data\Select::__set_state(array(
@@ -2131,36 +2139,20 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'visibleSearch' => false,
           )),
           20 => 
-          Pimcore\Model\DataObject\ClassDefinition\Data\InputQuantityValue::__set_state(array(
-             'fieldtype' => 'inputQuantityValue',
-             'queryColumnType' => 
-            array (
-              'value' => 'varchar(255)',
-              'unit' => 'varchar(50)',
-            ),
-             'columnType' => 
-            array (
-              'value' => 'varchar(255)',
-              'unit' => 'varchar(50)',
-            ),
-             'phpdocType' => '\\Pimcore\\Model\\DataObject\\Data\\InputQuantityValue',
-             'width' => NULL,
-             'unitWidth' => NULL,
-             'defaultValue' => NULL,
-             'defaultUnit' => NULL,
-             'validUnits' => 
-            array (
-              0 => '4',
-            ),
-             'decimalPrecision' => NULL,
-             'autoConvert' => false,
-             'name' => 'maximumlife',
-             'title' => 'Maximum Sell Life',
+          Pimcore\Model\DataObject\ClassDefinition\Data\Date::__set_state(array(
+             'fieldtype' => 'date',
+             'queryColumnType' => 'bigint(20)',
+             'columnType' => 'bigint(20)',
+             'phpdocType' => '\\Carbon\\Carbon',
+             'defaultValue' => 1622671200,
+             'useCurrentDate' => false,
+             'name' => 'expirydate',
+             'title' => 'Expiry Date',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
              'index' => false,
-             'locked' => false,
+             'locked' => NULL,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',

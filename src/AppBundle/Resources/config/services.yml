@@ -24,6 +24,10 @@ services:
     # COMMANDS
     #
 
+    AppBundle\OptionsProvider\BrandName:
+        class: AppBundle\OptionsProvider\BrandName
+        public: true
+
     # auto-register all commands as services
     AppBundle\Command\:
         resource: '../../Command/*'
@@ -35,4 +39,6 @@ services:
             - [setLogger, ['@logger']]
         tags:
             - { name: monolog.logger, channel: security }
+
+    
         
