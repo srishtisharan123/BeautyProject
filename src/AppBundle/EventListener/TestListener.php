@@ -17,9 +17,9 @@ class TestListener
          {
              $t=date("Y-m-d");
              $prod=$e->getObject();
-             if($prod->getAvailablefrom()<$t)
+             if($prod->getManufacturedon()>$t)
              {
-                 throw new \Pimcore\Model\Element\ValidationException("should be greater than todays date");
+                 throw new \Pimcore\Model\Element\ValidationException("Manufacturing date cannot be in future.");
              }
          }
      }

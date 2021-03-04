@@ -111,7 +111,7 @@ use Pimcore\Model\DataObject\Product;
             'applicationArea' => $product->getApplicationarea()->getName(),
             'image' => $product->getImage()->getRelativeFileSystemPath(),
             'rating' => $product->getRating(),
-            'availableFrom' => $product->getAvailablefrom()->toDateString(),
+            'availableFrom' => $product->getManufacturedon()->toDateString(),
             // $obj->getWaterproof();
             // $product->getClassification()->getCosmetics($obj);
             //'classification' => $product->getClassification(),

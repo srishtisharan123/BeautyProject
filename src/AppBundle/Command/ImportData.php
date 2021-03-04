@@ -78,7 +78,7 @@
                     $unit=DataObject\QuantityValue\Unit::getByAbbreviation("gm");
                     $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
                     $startDate= \Carbon\Carbon::parse($entry[$c++]);
-                    $prod->setAvailablefrom($startDate);
+                    $prod->setManufacturedon($startDate);
                     $temp=$entry[$c++];
                     if($temp=="body")
                     {

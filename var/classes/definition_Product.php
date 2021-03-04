@@ -21,7 +21,7 @@ Fields Summary:
 - applicationarea [manyToOneRelation]
 - image [manyToOneRelation]
 - rating [select]
-- availablefrom [date]
+- manufacturedon [date]
 - classification [objectbricks]
 - country [country]
 - quantity [inputQuantityValue]
@@ -35,7 +35,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
    'name' => 'Product',
    'description' => '',
    'creationDate' => 0,
-   'modificationDate' => 1614772397,
+   'modificationDate' => 1614888080,
    'userOwner' => 2,
    'userModification' => 2,
    'parentClass' => '',
@@ -211,7 +211,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'mandatory' => true,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
@@ -720,8 +720,8 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'phpdocType' => '\\Carbon\\Carbon',
              'defaultValue' => 1614034800,
              'useCurrentDate' => false,
-             'name' => 'availablefrom',
-             'title' => 'Available From',
+             'name' => 'manufacturedon',
+             'title' => 'Manufactured On',
              'tooltip' => '',
              'mandatory' => true,
              'noteditable' => false,
@@ -2152,7 +2152,7 @@ return Pimcore\Model\DataObject\ClassDefinition::__set_state(array(
              'mandatory' => true,
              'noteditable' => false,
              'index' => false,
-             'locked' => NULL,
+             'locked' => false,
              'style' => '',
              'permissions' => NULL,
              'datatype' => 'data',
