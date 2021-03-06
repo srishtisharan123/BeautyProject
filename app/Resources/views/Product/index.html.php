@@ -97,8 +97,25 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     <div id="product">
     
         <?php
-        
+        $perPageLimit = 2;
+            
+        if (isset($_GET["page"])) {
+          $page  = $_GET["page"];    
+        }    
+        else {
+          $page = 1;    
+        } 
+        $offset = ($page-1) * $perPageLimit; 
+
         $prod = new \Pimcore\Model\DataObject\Product\Listing();
+        $totalProducts = count($prod);
+        $prod->setLimit($perPageLimit);
+        if($offset > 0){
+          $prod->setOffset($offset);
+        }
+        else{
+          $prod->setOffset(0);
+        }
         ?>
         <table class="d">
             <tr>
@@ -128,19 +145,37 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     </div>
     <?php endif; ?>
 </div>
+
+<div class="pagination">    
+      <?php
+      if(!$this->editmode) {
+        echo "</br>";     
+        $totalPages = ceil($totalProducts / $perPageLimit);     
+        $pagLink = "";       
+      
+        if($page >= 2){   
+            echo "<a href='http://beauty.local/Product?page=".($page-1)."'>  Prev </a>";   
+        }       
+                    
+        for ($i = 1; $i <= $totalPages; $i++) {
+              
+          if ($i == $page) {   
+              $pagLink .= "<a class = 'active' href='http://beauty.local/Product?page=".$i."'>".$i." </a>";   
+          }         
+          else  {   
+              $pagLink .= "<a href='http://beauty.local/Product?page=".$i."'>".$i." </a>";     
+          }   
+        };     
+        echo $pagLink;
+            
+        if($page<$totalPages){   
+            echo "<a href='http://beauty.local/Product?page=".($page+1)."'>  Next </a>";   
+        }
+      }
+      ?>    
+      </div>
+
 <br><br><br>
-<!--		Start Pagination -->
-<div class="pagination">
-  <a href="#">&laquo;</a>
-  <a href="#">1</a>
-  <a href="#" class="active">2</a>
-  <a href="#">3</a>
-  <a href="#">4</a>
-  <a href="#">5</a>
-  <a href="#">6</a>
-  <a href="#">&raquo;</a>
-</div>
- <!-- 		End of Container -->
 
 <script>
 function searchProductByName() {
