@@ -21,4 +21,4 @@ services:
     AppBundle\EventListener\TestListener:
         tags:
             - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: dateValidation }
-            # - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: extension }
+            - { name: kernel.event_listener, event: pimcore.dataobject.preUpdate, method: extension }

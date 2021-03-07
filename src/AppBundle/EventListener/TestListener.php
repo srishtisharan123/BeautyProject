@@ -23,25 +23,28 @@ class TestListener
              }
          }
      }
-    //  public function extension(DataObjectEvent $e)
-    //  {
-    //      if($e->getObject() instanceof ImportData)
-    //      {
-    //         $files= new \Pimcore\Model\DataObject\ImportData\Listing();
-    //         foreach($files as $path)
-    //         {
-    //             $file=$path->getFile();
-    //             $file=(PIMCORE_PROJECT_ROOT . '/web/var/assets' .$file->getPath().$file->getFilename());
-    //         }
-    //         $array=explode("/",$file);
-    //         $originalname=$array[9];
-    //         $ext = substr(strrchr($originalname, '.'), 1);
-    //         if($ext!="csv")
-    //          {
-    //              throw new \Pimcore\Model\Element\ValidationException("PLease choose csv file");
-    //          }
-    //      }
-    //  }
+     public function extension(DataObjectEvent $e)
+     {
+         if($e->getObject() instanceof ImportData)
+         {
+            $files= new \Pimcore\Model\DataObject\ImportData\Listing();
+            foreach($files as $path)
+            {
+                $file=$path->getFile();
+                // console.log(PIMCORE_PROJECT_ROOT);
+                $file=(PIMCORE_PROJECT_ROOT . '/web/var/assets' .$file->getPath().$file->getFilename());
+            }
+            $array=explode("/",$file);
+            // console.log($array);
+            $originalname=$array[10];
+            $ext = substr(strrchr($originalname, '.'), 1);
+            // console.log($ext);
+            if($ext!="csv")
+             {
+                 throw new \Pimcore\Model\Element\ValidationException("PLease choose csv file");
+             }
+         }
+     }
 }
 
 

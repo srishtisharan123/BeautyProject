@@ -25,8 +25,11 @@
             {
                 $file=$path->getFile();
                 $class=$path->getClass_name();
+                $stat=$path->getStatus();
                 $file=(PIMCORE_PROJECT_ROOT . '/web/var/assets' .$file->getPath().$file->getFilename());
             }
+            // $this->dump($file);
+            // die();
             if(($h=fopen($file,"r"))!==FALSE)
             {
                 while(($data=fgetcsv($h,1000,","))!==FALSE)
@@ -35,7 +38,7 @@
                     $a[]=$data;
                     
                 }
-                if($class=="Product")
+                if($class=="Product" && $stat == false)
                 {
                 $count=1;
                 // $msg = "";
@@ -77,6 +80,25 @@
                     $prod->setIngredients($mat);
                     $unit=DataObject\QuantityValue\Unit::getByAbbreviation("gm");
                     $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
+                    $t=strtotime(date("d-m-Y"));
+                    $temp=strtotime($entry[$c]);    
+                    $this->dump($t);
+                    $this->dump($temp);  
+                    // die();       
+                    if($t<$temp)
+                    {
+                        $msg.="Date of row ".$count." should be greater than present date\n";
+                        p_r("failed");
+                        // $entries=new \Pimcore\Model\DataObject\ImportData\Listing();
+                        // foreach($entries as $entry)
+                        // {
+                        //     $entry->setStatus(false);
+                        //     $entry->save();
+                        // }
+                        
+                    }
+                    else
+                    {
                     $startDate= \Carbon\Carbon::parse($entry[$c++]);
                     $prod->setManufacturedon($startDate);
                     $temp=$entry[$c++];
@@ -128,6 +150,8 @@
                     $prod->setExpirydate($startDate);
                     $prod->save();
                     $msg.="Row ".$count." of product table is imported\n";
+                    $this->dump('saved');
+                }
                     $count++;
                     $entries=new \Pimcore\Model\DataObject\ImportData\Listing();
                     foreach($entries as $entry)
@@ -136,11 +160,12 @@
                         $entry->setMessage($msg);
                         $entry->save();
                     }
-                    $this->dump('saved');
+                    
+
 
                 }
             }
-            else if($class=="Category")
+            else if($class=="Category" && $stat == false)
            {
                 $count=1; 
                 foreach($a as $entry)
@@ -166,6 +191,9 @@
             
             
                 }
+           }
+           else {
+               $this->dump("already imported");
            }
         }
                 fclose($h);
