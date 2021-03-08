@@ -39,10 +39,9 @@ li a:hover {
 </style>
 <body>
 <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+  <li><a class="active" href="Home">Home</a></li>
+  <li><a href="Product">Product</a></li>
+  <li><a href="Feedback">Feedback</a></li>
 </ul>
     <div>
         <!-- <div id="logo">
