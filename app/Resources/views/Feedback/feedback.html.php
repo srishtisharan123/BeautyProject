@@ -84,17 +84,8 @@ input[type=submit]:hover {
                 $feedback->setComment($comment); 
                 $feedback->save();
 
-                $mail = new \Pimcore\Mail();
-                $mail->addTo('shreshtha185singh@gmail.com');
-                $mail->setSubject('Products Feedback');
-                $mail->setBodyText("Hi,
-
-                One new feedback from ". $_POST['firstname'] ." has been recorded.
-                
-                Thanks,
-                
-                Team Admin");
-                $mail->send();
+                $emailSender = new \AppBundle\MailNotification();
+                $emailSender->sendMail($firstname);
             }
             // echo $comment;
             // echo $email;

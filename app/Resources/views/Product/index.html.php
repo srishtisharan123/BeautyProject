@@ -72,13 +72,13 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 <!-- <button id="myBtn" onclick="myFunction()">Search</button> -->
 
 <p><button onclick="sortTable()">Sort</button></p>
-<h1><?= $this->input("headline", ["width" => 540]); ?></h1>
 
     <?php
     $brands = new \Pimcore\Model\DataObject\Brand\Listing();
     ?>
           <label for="brand">Choose a Brand:</label>
         <select name="brand" id="brand">
+        <!-- <option disabled selected>Select a brand</option> -->
         <?php
         foreach($brands as $brand) 
         {
@@ -97,25 +97,25 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     <div id="product">
     
         <?php
-        $perPageLimit = 2;
+        // $perPageLimit = 3;
             
-        if (isset($_GET["page"])) {
-          $page  = $_GET["page"];    
-        }    
-        else {
-          $page = 1;    
-        } 
-        $offset = ($page-1) * $perPageLimit; 
+        // if (isset($_GET["page"])) {
+        //   $page  = $_GET["page"];    
+        // }    
+        // else {
+        //   $page = 1;    
+        // } 
+        // $offset = ($page-1) * $perPageLimit; 
 
-        $prod = new \Pimcore\Model\DataObject\Product\Listing();
-        $totalProducts = count($prod);
-        $prod->setLimit($perPageLimit);
-        if($offset > 0){
-          $prod->setOffset($offset);
-        }
-        else{
-          $prod->setOffset(0);
-        }
+        // $prod = new \Pimcore\Model\DataObject\Product\Listing();
+        // $totalProducts = count($prod);
+        // $prod->setLimit($perPageLimit);
+        // if($offset > 0){
+        //   $prod->setOffset($offset);
+        // }
+        // else{
+        //   $prod->setOffset(0);
+        // }
         ?>
         <table class="d">
             <tr>
@@ -129,7 +129,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
         
        <table id="myTable" class="d">
        <?php
-        foreach($prod as $product) 
+        foreach($this->prod as $product) 
         {
             ?>
             <tr>
@@ -150,16 +150,16 @@ tr:nth-child(even) {background-color: #f2f2f2;}
       <?php
       if(!$this->editmode) {
         echo "</br>";     
-        $totalPages = ceil($totalProducts / $perPageLimit);     
+        $totalPages = ceil($this->totalProducts / $this->perPageLimit);     
         $pagLink = "";       
       
-        if($page >= 2){   
-            echo "<a href='http://beauty.local/Product?page=".($page-1)."'>  Prev </a>";   
+        if($this->page >= 2){   
+            echo "<a href='http://beauty.local/Product?page=".($this->page-1)."'>  Prev </a>";   
         }       
                     
         for ($i = 1; $i <= $totalPages; $i++) {
               
-          if ($i == $page) {   
+          if ($i == $this->page) {   
               $pagLink .= "<a class = 'active' href='http://beauty.local/Product?page=".$i."'>".$i." </a>";   
           }         
           else  {   
@@ -168,8 +168,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}
         };     
         echo $pagLink;
             
-        if($page<$totalPages){   
-            echo "<a href='http://beauty.local/Product?page=".($page+1)."'>  Next </a>";   
+        if($this->page < $totalPages){   
+            echo "<a href='http://beauty.local/Product?page=".($this->page+1)."'>  Next </a>";   
         }
       }
       ?>    

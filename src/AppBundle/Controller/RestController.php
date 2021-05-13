@@ -47,49 +47,57 @@ use Pimcore\Model\DataObject\Product;
 
     /**
       * @Route("/webservice/filterProductList")
-      * @Method({"GET"})
+      * @Method({"POST"})
       * @param Request $request
       * @return \Symfony\Component\HttpFoundation\JsonResponse
       * @throws \Pimcore\Http\Exception\ResponseException
       * @throws \Exception
       */
       public function getFilteredProductList(Request $request, BruteforceProtectionHandler $bruteforceProtectionHandler)
-      {
-          $brand = $request->query->get('brand');
-          $category = $request->query->get('category');
+      {   
+          if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+            $jsonData = json_decode($request->getContent(), true);
+            $request->request->replace(is_array($jsonData) ? $jsonData : array());
+          }
+          $brand = $request->request->get('brand');
+          $category = $request->request->get('category');
           $data = [];
-          $products = new \Pimcore\Model\DataObject\Product\Listing();                  
+          $dataCategory = [];
+          $products = new \Pimcore\Model\DataObject\Product\Listing();
+          $products->setCondition("brand = ?", $brand);
+          $products->addConditionParam('category__id = '.$category);
           $products->getObjects();
+          if ($brand) {
+            if ($category) {
+              $products->setCondition("brand = ?", $brand);
+              $categoryObject = \Pimcore\Model\DataObject\Category::getByName($category);
+              $categoryObject->setLimit(1);
+              foreach ($categoryObject as $category)
+              {
+                $dataCategory[] = $category->getId();
+              }
+              $products->addConditionParam('category__id = '.$dataCategory[0]);
+            } else {
+              $products->setCondition("brand = ?", $brand);
+            }
+          } else if ($category) {
+              $categoryObject = \Pimcore\Model\DataObject\Category::getByName($category);
+              $categoryObject->setLimit(1);
+              foreach ($categoryObject as $category)
+              {
+                $dataCategory[] = $category->getId();
+              }
+              $products->setCondition('category__id = '.$dataCategory[0]);
+          }
+ 
           foreach ($products as $product)
           {
-              if ($brand) {
-                  if ($category) {
-                      if (strcasecmp($category, $product->getCategory()->getName()) == 0 && strcasecmp($brand, $product->getBrand()->getName()) == 0) {
-                        $data[] = $this->getProductJson($product);
-                      }
-                  }
-                  else {
-                      if (strcasecmp($brand, $product->getBrand()->getName()) == 0) {
-                        $data[] = $this->getProductJson($product);
-                      }
-
-                  }
-              }
-              elseif ($category) {
-                  if (strcasecmp($category, $product->getCategory()->getName()) == 0) {
-                    $data[] = $this->getProductJson($product);
-                  }
-
-              }
-              else {
-                $data[] = $this->getProductJson($product);
-              }
-            
+            $data[] = $this->getProductJson($product);
           }
           if (!empty($data)) {
             return $this->createSuccessResponse($data, true);
-        }
-        return $this->createErrorResponse("No product found with given filter(s)!", Response::HTTP_NOT_FOUND);
+          }
+          return $this->createSuccessResponse('No product found for given filter(s).', true, Response::HTTP_ACCEPTED);
           
       }
 
@@ -99,7 +107,7 @@ use Pimcore\Model\DataObject\Product;
             'sku' => $product->getSku(),
             'productName' => $product->getName(),
             'description' => $product->getDescription(),
-            'brandName' => $product->getBrand()->getName(),
+            'brandName' => $product->getBrand(),
             'size' => $product->getSize(),
             'color' => $product->getColor()->getHex(),
             'price' => $product->getPrice(),
@@ -111,7 +119,7 @@ use Pimcore\Model\DataObject\Product;
             'applicationArea' => $product->getApplicationarea()->getName(),
             'image' => $product->getImage()->getRelativeFileSystemPath(),
             'rating' => $product->getRating(),
-            'availableFrom' => $product->getManufacturedon()->toDateString(),
+            'manufacturedOn' => $product->getManufacturedon()->toDateString(),
             // $obj->getWaterproof();
             // $product->getClassification()->getCosmetics($obj);
             //'classification' => $product->getClassification(),
@@ -122,7 +130,7 @@ use Pimcore\Model\DataObject\Product;
             'country' => $product->getCountry(),
             'quantity' => $product->getQuantity()->__toString(),
             'ingredients' => $product->getIngredients(),
-            'maximumlife' => $product->getMaximumlife()->__toString(),
+            'expiryDate' => $product->getExpirydate()->toDateString(),
           ];
       }
  }

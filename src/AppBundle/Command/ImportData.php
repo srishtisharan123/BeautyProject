@@ -23,9 +23,13 @@
             //$files->setCondition('class_name= ?','Product');
             foreach($files as $path)
             {
+            //     $this->dump($path);
+            // die();
                 $file=$path->getFile();
                 $class=$path->getClass_name();
                 $stat=$path->getStatus();
+            //     $this->dump($file);
+            // die();
                 $file=(PIMCORE_PROJECT_ROOT . '/web/var/assets' .$file->getPath().$file->getFilename());
             }
             // $this->dump($file);
@@ -82,8 +86,6 @@
                     $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
                     $t=strtotime(date("d-m-Y"));
                     $temp=strtotime($entry[$c]);    
-                    $this->dump($t);
-                    $this->dump($temp);  
                     // die();       
                     if($t<$temp)
                     {
@@ -114,6 +116,14 @@
                     {
                         $objBrick=new DataObject\Objectbrick\Data\Appliance($prod);
                         $objBrick->setWireless($entry[$c++]);
+                        $unit=DataObject\QuantityValue\Unit::getByAbbreviation("volt");
+                        $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
+                        $unit=DataObject\QuantityValue\Unit::getByAbbreviation("watt");
+                        $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
+                        $unit=DataObject\QuantityValue\Unit::getByAbbreviation("min");
+                        $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
+                        $unit=DataObject\QuantityValue\Unit::getByAbbreviation("months");
+                        $prod->setQuantity(new DataObject\Data\QuantityValue($entry[$c++],$unit->getId()));
                         //$objBrick->setVolts($entry[$c++]);
                         //$objBrick->setWatt($entry[$c++]);
                         //$objBrick->setHeating($entry[$c++]);
@@ -138,7 +148,7 @@
                         $objBrick->setFor($entry[$c++]);
                         $prod->getClassification()->setFace($objBrick);
                     } 
-                    if ($temp=='cosmetics') 
+                    if ($temp=='hair') 
                     {
                         $objBrick=new DataObject\Objectbrick\Data\Hair($prod);
                         $objBrick->setIdeal($entry[$c++]);
@@ -159,8 +169,10 @@
                         $entry->setStatus(true);
                         $entry->setMessage($msg);
                         $entry->save();
+
+                        $emailSender = new \AppBundle\MailNotification();
+                        $emailSender->sendImportMail();
                     }
-                    
 
 
                 }
